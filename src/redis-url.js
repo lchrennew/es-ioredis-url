@@ -40,7 +40,7 @@ export default class RedisURL {
      */
     #sentinelPassword
 
-    constructor(url = process.env.REDIS_URL, option = {
+    constructor(url = process.env.REDIS_URL ?? 'redis://127.0.0.1', option = {
         username: process.env.REDIS_USERNAME,
         password: process.env.REDIS_PASSWORD,
         sentinelPassword: process.env.REDIS_SENTINEL_PASSWORD,
