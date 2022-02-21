@@ -136,11 +136,12 @@ export default class RedisURL {
 
     /**
      *
-     * @return {Redis|Cluster}
+     * @param redis
+     * @return {Cluster|Redis}
      */
-    getRedis() {
+    getRedis(redis = Redis) {
         if (this.usesSentinel) {
-            return new Redis({
+            return new redis({
                 ...this.#getRedisOptions(),
                 sentinels: this.#servers,
                 password: this.#password,
@@ -148,7 +149,7 @@ export default class RedisURL {
             })
         }
         if (this.single) {
-            return new Redis({
+            return new redis({
                 ...this.#getRedisOptions(),
                 ...this.#servers[0],
                 password: this.#password,
@@ -156,7 +157,7 @@ export default class RedisURL {
             })
         }
         if (this.clustered) {
-            return new Redis.Cluster(this.#servers, this.#getClusterOptions())
+            return new redis.Cluster(this.#servers, this.#getClusterOptions())
         }
         throw '不支持该协议'
     }
