@@ -128,6 +128,7 @@ export default class RedisURL {
         option.retryDelayOnFailover = Number(this.#entries.get('retryDelayOnFailover')) || 100
         option.retryDelayOnClusterDown = Number(this.#entries.get('retryDelayOnClusterDown')) || 100
         option.retryDelayOnTryAgain = Number(this.#entries.get('retryDelayOnTryAgain')) || 100
+        option.clusterRetryStrategy = () => 1000
         option.slotsRefreshTimeout = Number(this.#entries.get('slotsRefreshTimeout')) || 1000
         option.slotsRefreshInterval = Number(this.#entries.get('slotsRefreshInterval')) || 5000
         option.redisOptions = this.#getRedisOptions()
