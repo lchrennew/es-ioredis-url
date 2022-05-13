@@ -1,6 +1,6 @@
 {
   "name": "es-ioredis-url",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "main": "src/index.js",
   "license": "MIT",
   "type": "module",
