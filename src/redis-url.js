@@ -157,7 +157,15 @@ export default class RedisURL {
             })
         }
         if (this.clustered) {
-            return new redis.Cluster(this.#servers, this.#getClusterOptions())
+            const clusterOptions = this.#getClusterOptions()
+            return new redis.Cluster(this.#servers, {
+                ...clusterOptions,
+                redisOptions: {
+                    ...clusterOptions.redisOptions,
+                    password: this.#password,
+                    username: this.#username,
+                }
+            })
         }
         throw '不支持该协议'
     }

@@ -85,6 +85,10 @@ describe('redis集群', () => {
     test('集群', async () => {
         await use('redis-cluster://localhost').then(redis => expect(redis.options.scaleReads).toEqual('master'))
     })
+
+    test('集群密码',async ()=>{
+        await use('redis-cluster://localhost').then(async redis => await expect(redis.options.redisOptions.password).toBe(process.env.REDIS_PASSWORD || null))
+    })
 })
 
 describe('安全协议', () => {
