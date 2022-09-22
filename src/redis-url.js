@@ -106,7 +106,7 @@ export default class RedisURL {
         option.lazyConnect = this.#entries.get('lazyConnect') === 'true'
         option.keyPrefix = this.#entries.get('keyPrefix') || ''
         // option.tls = null // TLS connection support. See https://github.com/luin/ioredis#tls-options
-        // option.retryStrategy = null // https://github.com/luin/ioredis#auto-reconnect
+        option.retryStrategy = () => 1000 // https://github.com/luin/ioredis#auto-reconnect
         option.maxRetriesPerRequest = Number(this.#entries.get('maxRetriesPerRequest')) || 0
         option.reconnectOnError = null // https://github.com/luin/ioredis#auto-reconnect
         option.readOnly = this.#entries.get('readOnly') === 'true'
@@ -138,7 +138,7 @@ export default class RedisURL {
     /**
      *
      * @param redis
-     * @return {Cluster|Redis}
+     * @return {Cluster | Redis}
      */
     getRedis(redis = Redis) {
         if (this.usesSentinel) {
